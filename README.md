@@ -1,66 +1,46 @@
-# MCTS - Monte Carlo Tree Search Implementation
+# MCTS: Monte Carlo Tree Search Foundations
 
-This repository contains a Python implementation of the Monte Carlo Tree Search (MCTS) algorithm, applied to classic board games like Tic-Tac-Toe and Gomoku.
+This repository contains a robust Python implementation of the Monte Carlo Tree Search (MCTS) algorithm. It serves as the algorithmic foundation for the **SkyZero** series, demonstrating the core principles of search-based decision-making in board games.
 
-## Features
+## Project Context
+This MCTS implementation is the baseline for more advanced reinforcement learning projects:
+- **MCTS Foundations (Current)**: Pure search-based AI using random rollouts.
+- [SkyZero_V0](../SkyZero_V0/README.md): AlphaZero (MCTS + Neural Networks).
+- [SkyZero_V2](../SkyZero_V2/README.md): AlphaZero with KataGo optimizations.
+- [SkyZero_V3](../SkyZero_V3/README.md): Gumbel AlphaZero implementation.
 
-- **MCTS Core Algorithm**: Pure Python implementation of MCTS including Selection, Expansion, Simulation, and Backpropagation.
-- **Game Environments**:
-  - **Tic-Tac-Toe**: Standard 3x3 game.
-  - **Gomoku**: Support for various board sizes (default 15x15) and Renju rules (forbidden moves for black).
-- **Interactive Play**: Play against the MCTS AI directly from your terminal.
-- **Extensible**: Easily add new games by implementing the game logic interface.
+## Core Features
+- **MCTS Lifecycle**: Full implementation of the four stages:
+    1. **Selection**: Using UCB1 (Upper Confidence Bound) to balance exploration and exploitation.
+    2. **Expansion**: Growing the search tree at leaf nodes.
+    3. **Simulation**: Random rollouts (playouts) to estimate state value.
+    4. **Backpropagation**: Updating node statistics from outcome results.
+- **Environment Support**:
+    - **Tic-Tac-Toe**: Standard 3x3 implementation.
+    - **Gomoku**: Support for various board sizes and Renju rules.
+- **Interactive Mode**: Play directly against the MCTS AI in the terminal.
 
 ## Project Structure
+- `mcts.py`: Core logic of the MCTS algorithm.
+- `envs/`: Game environment definitions (Tic-Tac-Toe, Gomoku).
+- `main.py`: Entry point for terminal-based play.
+- `test_gomoku.py`: Benchmarking and simulation scripts.
 
-```text
-.
-├── envs/
-│   ├── gomoku.py      # Gomoku game logic and Renju rules
-│   └── tictactoe.py   # Tic-Tac-Toe game logic
-├── mcts.py            # Core MCTS algorithm implementation
-├── main.py            # Entry point to play Tic-Tac-Toe vs MCTS
-├── test_gomoku.py     # Script to test MCTS on Gomoku
-├── utils.py           # Utility functions (e.g., board printing)
-└── LICENSE            # MIT License
-```
-
-## Getting Started
-
-### Prerequisites
-
-- Python 3.x
-- NumPy
-- SciPy (for Gomoku's advanced rule checks)
-
-Install dependencies:
-
+## Quick Start
+### Installation
 ```bash
 pip install numpy scipy
 ```
 
-### Running the Project
-
-To play a game of Tic-Tac-Toe against the MCTS AI:
-
+### Run Tic-Tac-Toe vs MCTS
 ```bash
 python main.py
 ```
 
-To run a Gomoku simulation (AI vs AI on a 9x9 board):
-
+### Run Gomoku Simulation
 ```bash
 python test_gomoku.py
 ```
 
-## How it Works
-
-MCTS builds a search tree by repeatedly performing four steps:
-1. **Selection**: Start from root and select child nodes using UCB (Upper Confidence Bound) until a leaf node is reached.
-2. **Expansion**: If the leaf node is not terminal, create child nodes for untried actions.
-3. **Simulation**: Perform a random rollout from the new node until a terminal state is reached.
-4. **Backpropagation**: Update the statistics (visit count and value) of the nodes along the path from the expanded node back to the root.
-
 ## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Licensed under the [MIT License](LICENSE).
